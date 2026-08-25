@@ -9,22 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
 
 public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, Runnable, View.OnClickListener{
     private Toolbar toolbar;
     private MediaPlayer mediaPlayer;
     private SeekBar seekbar;
     private Handler handler;
-    private Button b;
-    private boolean flag;
-    private int musica;
+    private int musica, indiceLista;
+    private ArrayList<Playlist> lista;
+    private CardView card1,card2,card3,card4,card5;
+    private TextView textoMusicaSelecionada, textoMusicaTocando;
     //___________________________________________________________________________________________________________________________
 
     @Override
@@ -46,10 +51,31 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         seekbar.setOnSeekBarChangeListener(this);
         handler = new Handler();
 
-        b = findViewById(R.id.button2);
-        b.setOnClickListener(this);
-        flag = false;
         musica = R.raw.forrodofarol_quincasmoreira;
+
+        lista = new ArrayList<Playlist>();
+        lista.add(new Playlist("Forro do Farol", R.raw.forrodofarol_quincasmoreira));
+        lista.add(new Playlist("Hard Red Heart - Blue Beat Review", R.raw.hardredheart));
+        lista.add(new Playlist("Paradise - Anno Domini Beats", R.raw.paradise));
+        lista.add(new Playlist("Purple Desire - The Grey Room _ Clark Sims", R.raw.purpledesire));
+        lista.add(new Playlist("Six Seven", R.raw.sixseven));
+        lista.add(new Playlist("Mukbang - The Soundlings", R.raw.mukbang));
+
+        card1 = findViewById(R.id.card1);
+        card1.setOnClickListener(this);
+        card2 = findViewById(R.id.card2);
+        card2.setOnClickListener(this);
+        card3 = findViewById(R.id.card3);
+        card3.setOnClickListener(this);
+        card4 = findViewById(R.id.card4);
+        card4.setOnClickListener(this);
+        card5 = findViewById(R.id.card5);
+        card5.setOnClickListener(this);
+        textoMusicaSelecionada = findViewById(R.id.textView);
+        textoMusicaTocando = findViewById(R.id.textView2);
+
+
+
 
 
     }
@@ -64,6 +90,7 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         if (id == R.id.id001){ //se for o id 001 quer dizer que é para dar play
             if (mediaPlayer == null) {
                 mediaPlayer = MediaPlayer.create(this, musica);
+                textoMusicaTocando.setText("Musica Tocando:" + lista.get(indiceLista).getNome());
                 mediaPlayer.setOnCompletionListener(this);
                 seekbar.setMax(mediaPlayer.getDuration());
                 handler.post(this);
@@ -83,7 +110,10 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         }
         if (id == R.id.id002){
             if (mediaPlayer != null && mediaPlayer.isPlaying()){
-                mediaPlayer.pause();
+                mediaPlayer.pause();{
+
+
+    }
             }
         }
         return false;
@@ -136,18 +166,36 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
 
     @Override
     public void onClick(View view) {
-        //ação veio do botão
-        if (view == b){
-            if (flag){
-                musica = R.raw.forrodofarol_quincasmoreira;
-                flag = true;
-
-            }else {
-                musica = R.raw.sixseven;
-                flag = false;
-
-            }
+        if (view == card1){
+            indiceLista = 0;
+            textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
+            musica = lista.get(indiceLista).getMusica();
         }
+
+        if (view == card2){
+            indiceLista = 1;
+            textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
+            musica = lista.get(indiceLista).getMusica();
+        }
+
+        if (view == card3){
+            indiceLista = 3;
+            textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
+            musica = lista.get(indiceLista).getMusica();
+        }
+
+        if (view == card4){
+            indiceLista = 4;
+            textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
+            musica = lista.get(indiceLista).getMusica();
+        }
+
+        if (view == card5){
+            indiceLista = 5;
+            textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
+            musica = lista.get(indiceLista).getMusica();
+        }
+
     }
 
 }
