@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/carro2"
     android:orientation="vertical"
     tools:context=".Tela02">
 
@@ -12,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#87CEFA"
+        android:background="#8187CEFA"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:subtitle="subMusica"
@@ -21,14 +22,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#C2BDBDBD"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="00;00" />
+            android:layout_weight="0"
+            android:text="00:00"
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
         <SeekBar
             android:id="@+id/seekBar"
@@ -40,22 +44,26 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="00:00" />
+            android:layout_weight="0"
+            android:text="00:00"
+            android:textColor="#000000"
+            android:textSize="12sp" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Música Selecionada" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Música Tocando:" />
+        android:text="Música Tocando:"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Música Selecionada"
+        android:textColor="#FFFFFF" />
 
     <ScrollView
         android:layout_width="match_parent"

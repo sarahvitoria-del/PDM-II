@@ -24,20 +24,20 @@ import java.util.ArrayList;
 
 public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletionListener, SeekBar.OnSeekBarChangeListener, Runnable, View.OnClickListener{
     private Toolbar toolbar;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer; //objeto que reproduzir uma musica
     private SeekBar seekbar;
     private Handler handler;
     private int musica, indiceLista;
     private ArrayList<Playlist> lista;
     private CardView card1,card2,card3,card4,card5;
-    private TextView textoMusicaSelecionada, textoMusicaTocando;
+    private TextView textoMusicaSelecionada, textoMusicaTocando, placarTempoAtual, placarTempoRestante;
     private ImageView imgPreview, imgNext;
     //___________________________________________________________________________________________________________________________
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this); //a depender do tipo de dispositivo, o app ira prenecer a tela toda no maximo posivel
+        EdgeToEdge.enable(this); ///a depender do tipo de dispositivo, o app ira prenecer a tela toda no maximo posivel
         setContentView(R.layout.activity_tela02);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -45,17 +45,20 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
             return insets;
         });
         toolbar = findViewById(R.id.toolbar);
-        //atribui a toolbar o "poder" de ActionBar
-        setSupportActionBar(toolbar);
-        //habilita o botão de voltar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //🠔
-        seekbar = findViewById(R.id.seekBar);
+
+        ///atribui a toolbar o "poder" de ActionBar
+        setSupportActionBar(toolbar); ///voltar para a tela anterio. Transformar a ActionBar(pode ter o botão de voltar. Menu de tes pontinhos ou colocar icones na barra) em uma toobar
+
+        ///habilita o botão de voltar             | so aparece a seta se tiver essa linha
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); ///🠔 setDisplayHomeAsUpEnabled da poder de barra de musicas
+        seekbar = findViewById(R.id.seekBar);  ///findViewById mapeamento
         seekbar.setOnSeekBarChangeListener(this);
-        handler = new Handler();
+        handler = new Handler(); ///fazendo um paralelo
 
         musica = R.raw.forrodofarol_quincasmoreira;
 
-        lista = new ArrayList<Playlist>();
+        lista = new ArrayList<Playlist>(); /// estanciei a lista e
+        //add itens na lista
         lista.add(new Playlist("Forro do Farol", R.raw.forrodofarol_quincasmoreira));
         lista.add(new Playlist("Hard Red Heart - Blue Beat Review", R.raw.hardredheart));
         lista.add(new Playlist("Paradise - Anno Domini Beats", R.raw.paradise));
@@ -64,8 +67,8 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         lista.add(new Playlist("Mukbang - The Soundlings", R.raw.mukbang));
 
         card1 = findViewById(R.id.card1);
-        card1.setOnClickListener(this);
-        card2 = findViewById(R.id.card2);
+        card1.setOnClickListener(this); ///metodo de toque
+        card2 = findViewById(R.id.card2); ///mapeamento
         card2.setOnClickListener(this);
         card3 = findViewById(R.id.card3);
         card3.setOnClickListener(this);
@@ -81,20 +84,26 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         imgNext = findViewById(R.id.imageView3);
         imgNext.setOnClickListener(this);
 
-
-
-
-
+        placarTempoAtual= findViewById(R.id.textView3);
+        placarTempoRestante = findViewById(R.id.textView4);
     }
+    public String formatarTempo(int tempo){
+        int segundos = tempo/1000;
+        int minutos = segundos/60;
+        segundos = segundos%60;
+        String tempoFormatado = String.format("%02d:%02d", minutos, segundos);
+        return tempoFormatado;
+    } ///convete os miliseguntos em segundos
     //___________________________________________________________________________________________________________________________
 
-    public  boolean onOptionsItemSelected(MenuItem item) {//todos os icones que estaop na tool  bar
+    ///trada dos elementos da toobar
+    public  boolean onOptionsItemSelected(MenuItem item) {///todos os icones que estaop na tool  bar
         int id = item.getItemId();
         if(id == android.R.id.home) {
             finish();
         }    //____________________________Runnable__________________________________________________________________________________________
 
-        if (id == R.id.id001){ //se for o id 001 quer dizer que é para dar play
+        if (id == R.id.id001){ ///se for o id 001 quer dizer que é para dar play
           play();
 
         }
@@ -102,6 +111,7 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
             stop();
         }
         if (id == R.id.id002){
+            //pause
             if (mediaPlayer != null && mediaPlayer.isPlaying()){
                 mediaPlayer.pause();{
 
@@ -112,7 +122,7 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
         return false;
     }
     //___________________________________________________________________________________________________________________________
-    public boolean onCreateOptionsMenu(Menu menu) {//inflar o menu na tela 2
+    public boolean onCreateOptionsMenu(Menu menu) {///inflar o menu na tela 2, inpla na toobar os icones que vão aparecer. ingeta o menu dentro da toobar enquantos executa o codigo
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
         return true;
@@ -120,13 +130,13 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
     }
     //___________________________________________________________________________________________________________________________
     @Override
-    public void onCompletion(MediaPlayer mediaPlayer) {
-        handler.removeCallbacks(this);
+    public void onCompletion(MediaPlayer mediaPlayer) { ///chamado quando a musica termina
+        handler.removeCallbacks(this); ///tira as chamadas que estavam agendadas
         mediaPlayer.release();
-        mediaPlayer = null;
-        seekbar.setProgress(0); //a bolinha volta para o inicio quando damos pare
+        mediaPlayer = null; ///limpa a memoria
+        seekbar.setProgress(0); ///a bolinha volta para o inicio quando clicar em pare
         indiceLista++;
-        if (indiceLista >= lista.size()){
+        if (indiceLista >= lista.size()){ //volta para o inicio da lista quando a ultima musica termina de tocar
             indiceLista = 0;
         }
 
@@ -149,8 +159,8 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
     //____________________________________________
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) { //metodo do controle da bolinha
-        if (mediaPlayer!=null){
+    public void onStopTrackingTouch(SeekBar seekBar) { ///metodo do controle da bolinha
+        if (mediaPlayer!=null){///tira o dedo da seekbar
             mediaPlayer.seekTo((seekBar.getProgress()));
         }
 
@@ -159,15 +169,21 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
     @Override
     public void run() {
         if (mediaPlayer!=null){
-            seekbar.setProgress(mediaPlayer.getCurrentPosition());
-            handler.postDelayed(this, 1000);
+            int tempoAtual = mediaPlayer.getCurrentPosition();
+            int duracao = mediaPlayer.getDuration();
+            int tempoRestante = duracao - tempoAtual;
+            placarTempoAtual.setText(formatarTempo(tempoAtual));
+            placarTempoRestante.setText("-"+ formatarTempo(tempoRestante));
+
+            seekbar.setProgress(mediaPlayer.getCurrentPosition());///precessa a seekbar de acordo a mediaplayer
+            handler.postDelayed(this, 1000); ///a cada um segundo ele volta
         }
 
     }
     //____________________________View.OnClickListener______________________________________________________________________________
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) { ///cada card ao ser clicado troca a musica
         if (view == card1){
             indiceLista = 0;
             textoMusicaSelecionada.setText("musica Selecionada:"+lista.get(indiceLista).getNome());
@@ -219,21 +235,26 @@ public class Tela02 extends AppCompatActivity implements MediaPlayer.OnCompletio
 
     }
     public void play(){
-        if (mediaPlayer == null) {
+        if (mediaPlayer == null) {///cria a musica
             mediaPlayer = MediaPlayer.create(this, lista.get(indiceLista).getMusica());
-            textoMusicaTocando.setText("Musica Tocando:" + lista.get(indiceLista).getNome());
-            mediaPlayer.setOnCompletionListener(this);
+           /// textoMusicaTocando.setText("Musica Tocando:" + lista.get(indiceLista).getNome());
+            toolbar.setTitle(lista.get(indiceLista).getNome());
+            int x = indiceLista;
+            x++;
+
+            toolbar.setSubtitle(Integer.toString(x)+" de " +Integer.toString(lista.size()));
+            mediaPlayer.setOnCompletionListener(this); ///metoda da musica
             seekbar.setMax(mediaPlayer.getDuration());
             handler.post(this);
             mediaPlayer.start();
-        }else if (!mediaPlayer.isPlaying()){//se o mediaPlayer NÃO estiver tocando
+        }else if (!mediaPlayer.isPlaying()){///se o mediaPlayer NÃO estiver tocando
             mediaPlayer.start();
             handler.post(this);
-                    //handler=
+                    ///handler=
         }
     }
     public void stop(){
-        if (mediaPlayer != null){
+        if (mediaPlayer != null){///verifica se esta nulo
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
