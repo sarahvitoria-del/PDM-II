@@ -4,12 +4,12 @@ public class Slide {
     private String nome;
     private int imagem;
     private String texto;
-
     //______________________________________________________________________________
 
     public Slide (String nome, int imagem){ ///*metodo construtor tem que, obrigatoriamente, o mesmo nome da classe. *Metodo construtor nunca tera return
         this.nome = nome;
         this.imagem = imagem;
+
 
     }
     //______________________________________________________________________________
@@ -17,7 +17,8 @@ public class Slide {
         this.nome = nome;
         this.imagem = imagem;
         this.texto = texto;
-}
+
+    }
 
 
 //______________________________________________________________________________
@@ -49,7 +50,6 @@ public class Slide {
 
     public void setTexto(String texto) {
         this.texto = texto;
-    }
-}
+    }}
 
 //______________________________________________________________________________
