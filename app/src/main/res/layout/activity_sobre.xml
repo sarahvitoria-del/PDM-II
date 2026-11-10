@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Sobre">
+
+    <LinearLayout
+        android:id="@+id/idlinearSobre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="#8767EE90"
+            android:gravity="center"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:buttonGravity="center_vertical"
+            app:navigationIcon="@drawable/data_loss_prevention"
+            app:title="𝕊𝕠𝕓𝕣𝕖 𝕠 ΛYPΛΣ"
+            app:titleTextColor="#000000" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12sp"
+            android:text="O Aypæ foi feito para o que realmente importa: a música.  Sem complicações ou distrações, nossa missão é entregar o som certo para qualquer momento da sua rotina. Dê o play e viva a sua trilha sonora." />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:text="➤ Desenvolvedor: Sarah Vitoria Lavras de Moraes \n➤ Contato / Suporte: sarah.vitoria@alunos.ifsuldeminas.edu.br \n➤ Versão do App: 1.0.0 \n➤ Site: www.aypae.com  \n[ Termos de Uso ] | [ Política de Privacidade ] " />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/idnavigationsobre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/cabecalho"
+        app:menu="@menu/menudrawer" />
+
+</LinearLayout>

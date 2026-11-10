@@ -27,13 +27,13 @@ public class TelaHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.idlinear), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.idlinearSobre), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         drawerLayout=findViewById(R.id.iddrawer);
-        navigationView = findViewById(R.id.idnavigation);
+        navigationView = findViewById(R.id.idnavigation); ///
         toolbar = findViewById(R.id.toolbar2);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -56,6 +56,17 @@ public class TelaHome extends AppCompatActivity {
                     startActivity(new Intent(TelaHome.this, Tela03.class));
                     return true;
 
+                }
+
+                if (menuItem.getItemId() == R.id.idquiz){
+                    drawerLayout.close();
+                    startActivity(new Intent(TelaHome.this, Quiz.class));
+                    return true;
+                }
+                if (menuItem.getItemId() == R.id.idsobre){
+                    drawerLayout.close();
+                    startActivity(new Intent(TelaHome.this, Sobre.class));
+                    return true;
                 }
                 return false;
             }

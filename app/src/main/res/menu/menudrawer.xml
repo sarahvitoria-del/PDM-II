@@ -13,4 +13,12 @@
         android:id="@+id/idtela03"
         android:icon="@drawable/play_circle_48px"
         android:title="Slides" />
+    <item
+        android:id="@+id/idquiz"
+        android:icon="@drawable/quiz"
+        android:title="Quiz" />
+    <item
+        android:id="@+id/idsobre"
+        android:icon="@drawable/data_loss_prevention"
+        android:title="Sobre" />
 </menu>
